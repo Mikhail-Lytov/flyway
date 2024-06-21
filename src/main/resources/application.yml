@@ -7,21 +7,24 @@ spring:
     username: postgres
     password: 8267
   jpa:
-    database: POSTGRESQL
     show-sql: false
     properties:
       hibernate:
         jdbc:
           time_zone: UTC
     hibernate:
-      ddl-auto:  ${DDL_AUTO:validate}
+      ddl-auto:  ${DDL_AUTO:none}
+    open-in-view: true
   flyway:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     schemas: public
     url: ${spring.datasource.url}
     baseline-on-migrate: true
-    #locations: "filesystem:db/migration"
+    locations:
+    - classpath:db/migration/base_img_bd
+    - classpath:db/migration/script
     validate-on-migrate: true
     enabled: true
     validate-migration-naming: false #Следует ли проверять миграции и обратные вызовы, сценарии которых не соответствуют правильному соглашению об именовании.
+   # vbaseline-version: 2.1.0
