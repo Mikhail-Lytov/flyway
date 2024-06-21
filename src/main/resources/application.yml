@@ -1,0 +1,27 @@
+
+spring:
+  application:
+    name: test_fly_way
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fly_way
+    username: postgres
+    password: 8267
+  jpa:
+    database: POSTGRESQL
+    show-sql: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+    hibernate:
+      ddl-auto:  ${DDL_AUTO:validate}
+  flyway:
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    schemas: public
+    url: ${spring.datasource.url}
+    baseline-on-migrate: true
+    #locations: "filesystem:db/migration"
+    validate-on-migrate: true
+    enabled: true
+    validate-migration-naming: false #Следует ли проверять миграции и обратные вызовы, сценарии которых не соответствуют правильному соглашению об именовании.
